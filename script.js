@@ -141,52 +141,7 @@ $(document).ready(function () {
       //   $(input).css("background", past);
       // }
     });
-    var tableElement = document.getElementsByClassName('table')[0].children[0].children;
-    console.log('tableElement', tableElement);
-    //enter and save event calendar 
-    //grab all btns then create functions on click
-    console.log(localStorage);
-    for (let i = 0; i < localStorage.length; i++) {
-        switch (localStorage[i]) {
-            // switch () {
-            //     case '9am':
-            //     case '10am':
-            //     case '11am':
-            //     case '12am':
-            //     case '12pm':
-            //     case '1pm':
-            //     case '2pm':
-            //     case '3pm':
-            //     case '4pm':
-            //     case '5pm':
-        }}
-
-    function saveInput (){
-        console.log(this)
-
-        var parentEl = this.parentElement;
-        console.log(parentEl);
-
-        var siblingEl = parentEl.previousElementSibling;
-        console.log('sibling:', siblingEl);
-
-        var siblingFirstEl = siblingEl.previousElementSibling;
-        console.log('time', siblingFirstEl.innerHTML);
-
-        var inputEl = siblingEl.firstElementChild;
-        console.log('input', inputEl.value);
-
-        localStorage.setItem(siblingFirstEl.innerHTML, inputEl.value);
-    }
-
-    var btns = document.querySelectorAll('button');
-    // console.log(btns);
-    for (let i = 0; i < btns.length; i++ ) {
-        // function saveInput(el) {
-        // console.log(el.value);
-        btns[i].addEventListener("click", saveInput);
-    }
-    btns[i]
+   
     
   });
   
