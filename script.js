@@ -1,3 +1,5 @@
+var storage = []; 
+
 $(document).ready(function () {
     var day = moment().format("dddd");
     console.log(day);
@@ -132,7 +134,6 @@ $(document).ready(function () {
         $(input).css("background", past);
       }
 
-
       // if (hour < currentHour) {
       //   console.log("yes it less than current hour");
       //   console.log(val);
@@ -142,6 +143,74 @@ $(document).ready(function () {
       // }
     });
    
-    
+   
+
+    var btn = $('.btn');
+    $(btn).click(function(e) {
+        var index = this.parentNode.parentNode.rowIndex;
+        // console.log(this);
+        var value = $(this).closest('.savebtn');
+        value = $(value).prev().find('input').val();
+        var time = $(this).closest('.savebtn');
+        time = $(time).prev().prev().text();
+        // console.log(index, value, time);
+
+        var obj = {i: index, str: value, t: time};
+        // console.log(obj);
+        
+        storage.push(obj);
+        //sort storage array
+        // storage.sort((a, b) => (a.i > b.i) ? 1 : -1);
+        storage.sort(function(a, b) {
+            if(a.i > b.i) {
+                return 1;
+            } else {
+                return -1;
+            }
+        });
+        console.log(storage);
+
+        //set local storage
+        // localStorage.setItem("calednar", storage);
+
+        //convert storage array to string for localStorage. 
+        localStorage.setItem("calendar", JSON.stringify(storage));
+        // console.log(localStorage.getItem("calendar"));
+
+        //convert localStorage fom string back to object
+        var data = JSON.parse(localStorage.getItem("calendar"));
+
+        // console.log(data);
+
+    //before displaying localStorage destroy elements in tasks div
+        $('#tasks').html('')
+     //loop through array and display
+     data.forEach(function(val, i) {
+        // console.log(val);
+        //make elem to append
+        var elem = '<p>' +val.t+ ' - ' +val.str+ '</p>';
+        //append elem to task div
+        $('#tasks').append(elem);
+    });
+        });
+        
+        //onpage load if localStorage display
+        var localStorageArray = JSON.parse(localStorage.getItem("calendar"));
+
+        
+        if(localStorageArray !== null) {
+            //execute code if localStorage is not empty
+            console.log('localStoragArray');
+            console.log(localStorageArray);
+            
+            //loop through array and display
+            localStorageArray.forEach(function(val, i) {
+                // console.log(val);
+                //make elem to append
+                var elem = '<p>' +val.t+ ' - ' +val.str+ '</p>';
+                //append elem to task div
+                $('#tasks').append(elem);
+            });
+        }
+            
   });
-  
